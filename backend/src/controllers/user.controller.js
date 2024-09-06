@@ -1,4 +1,4 @@
-import { User } from "../models/user.model.js";
+import { Availability, User } from "../models/user.model.js";
 import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
@@ -26,7 +26,7 @@ const helloTest = asyncHandler( async (req, res) => {
 
 const registerUser = asyncHandler( async (req, res) => {
     
-    const {name, email, role, password,  availability } = req.body;
+    const {name, email, role, password} = req.body;
     
     console.log("email: ",email);
 
@@ -59,7 +59,44 @@ const registerUser = asyncHandler( async (req, res) => {
         password,
         role,
         avatar:`https://robohash.org/${email}\.png?size=50x50&set=set1`,
-        availability
+        availability: await Availability.create({
+            monday: {
+                from: "09:00",
+                to: "05:00",
+                active: true
+            },
+            tuesday: {
+                from: "09:00",
+                to: "05:00",
+                active: true
+            },
+            wednesday: {
+                from: "09:00",
+                to: "05:00",
+                active: true
+            },
+            thursday: {
+                from: "09:00",
+                to: "05:00",
+                active: true
+            },
+            friday: {
+                from: "09:00",
+                to: "05:00",
+                active: true
+            },
+            saturday: {
+                from: "09:00",
+                to: "05:00",
+                active: false
+            },
+            sunday: {
+                from: "09:00",
+                to: "05:00",
+                active: false
+            }
+        })
+        
     })
 
     if(!createdUser){
@@ -67,7 +104,7 @@ const registerUser = asyncHandler( async (req, res) => {
     }
 
     return res.status(201).json(
-        new ApiResposnse(201, createdUser, "User registered successfully")
+        new ApiResponse(201, createdUser, "User registered successfully")
     )
     
 })
@@ -143,6 +180,27 @@ const logoutUser = asyncHandler(async(req, res) => {
     .clearCookie("refreshToken", options)
     .json(new ApiResponse(200, {}, "User logged Out"))
 })
+
+const updateAvailability = asyncHandler( async (req, res) => {
+
+    const userAvailability = req.body.availability;
+
+    const updatedUser = await User.findByIdAndUpdate(
+        req.user._id,
+        {
+            $set: {
+                Availability: userAvailability
+            }
+        },
+        {
+            new: true
+        }
+    )
+
+})
+
+
+
 
 
 
