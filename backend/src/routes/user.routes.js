@@ -1,18 +1,17 @@
 import { Router } from "express";
-import { helloTest } from "../controllers/user.controller.js";
+import { helloTest, loginUser, logoutUser, registerUser } from "../controllers/user.controller.js";
+import { verifyJWT } from "../middleware/auth.middleware.js";
 helloTest
 const router = Router()
 
-router.route("/register").post(createUser)
+router.route("/register").post(registerUser)
 router.route("/login").post(loginUser)
-router.route("/users").get(fetchUsers)
-router.route("/users/:id").get(fetchUserById)
-router.route("/users/:id/availability").get(getUserAvailability)
+router.route("/logout").post(verifyJWT,  logoutUser)
+//router.route("/users").get(fetchUsers)
+//router.route("/users/:id").get(fetchUserById)
+//router.route("/users/:id/availability").get(getUserAvailability)
 
 router.route("/").get(helloTest)
-//router.route("/:id").get(fetchUserById)
-//router.route("/search/:name").get(fetchUsersByName)
-//router.route("/filter/availability/:available").get(filterUsersByAvailability)
 
 
 
