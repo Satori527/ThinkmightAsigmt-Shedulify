@@ -1,26 +1,18 @@
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { axiosAPI } from '../api/axiosAPI';
 import { login as authLogin } from '../store/authSlice';
 import './SignupForm.css';
 
 function LoginForm() {
-    const authstatus = useSelector((state) => state.auth.status)
     const {register, handleSubmit} = useForm()
     const [userData, setUserData] = useState({})
     const dispatch = useDispatch()
     const [error, setError] = useState({})
     const navigate = useNavigate()
     let msgColor = "text-red-600";
-
-    useEffect(() => {
-        if(authstatus){
-            navigate("/profile")
-        }
-    }, [authstatus])
-
 
     console.log(error);
     const loginUser = async(data) => {

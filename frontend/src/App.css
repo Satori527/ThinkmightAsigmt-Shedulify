@@ -1,12 +1,24 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+  height:auto;
+  border: none;
   text-align: center;
 }
 
-main{
-  display: flex;
-  justify-content: space-evenly;
+body,
+html {
+  width: 100%;
+  margin: 0;
 }
 
+main{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  word-wrap:normal;
+}
+
+body{
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif ;
+}

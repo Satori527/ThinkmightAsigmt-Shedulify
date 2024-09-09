@@ -3,11 +3,12 @@ import { createRoot } from 'react-dom/client';
 import { Provider } from "react-redux";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import App from './App.jsx';
-import AuthLayout from './components/AuthLayout.jsx';
 import "./index.css";
 import store from "./store/store.js";
 //import authSlice from './store/authSlice.js';
 
+import Availability from './components/Profile/Availability.jsx';
+import Events from './components/Profile/Events.jsx';
 import Home from './pages/Home.jsx';
 import Login from './pages/Login.jsx';
 import Profile from './pages/Profile.jsx';
@@ -24,32 +25,37 @@ const router = createBrowserRouter([
         },
         {
             path: "/login",
-            element: (
-                <AuthLayout authentication={false}>
-                    <Login />
-                </AuthLayout>
-            ),
+            element:<Login />
+                
         },
         {
             path: "/signup",
-            element: (
-                <>
-                    {console.log("signupRoute")}
-                    <Signup />
-                </>
+            element:<Signup />
                 
-                
-            ),
         },
+        // {
+        //     path: "/signup",
+        //     element: (
+        //         <AuthLayout>
+        //             <Signup />
+        //         </AuthLayout>
+                
+                
+        //     ),
+        // },
         {
             path: "/profile",
-            element: (
-                <AuthLayout authentication>
-                    {" "}
-                    <Profile />
-                </AuthLayout>
-            ),
+            element: <Profile/>
+
         },
+        {
+            path: "/profile/events",
+            element: <Events/>
+        },
+        {
+            path: "/profile/availability",
+            element: <Availability/>
+        }
     ],
 },
 ])
