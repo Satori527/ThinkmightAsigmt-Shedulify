@@ -1,12 +1,13 @@
-import { Schema } from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 const eventSchema = new Schema({
         email: String,
         uri: String,
+        event_type: String,
         title: String,
         description: String,
         length: Number,
-        bookingTimes: {start:Date, end:Date},
+        booking_times: {date:Date, time:String},
         attendees: [{
             type: Schema.Types.ObjectId,
             ref: "User"

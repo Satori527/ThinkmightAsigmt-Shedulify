@@ -1,30 +1,30 @@
 import { useEffect, useState } from "react";
-import EventCard from "../EventCard";
+import UserCard from "../UserCard";
 //import { useSelector } from "react-redux";
 import { axiosAPI } from "../../api/axiosAPI";
 
 
 
-const Events = () => {
+const Dashboard = () => {
 
 
-    const [events, setevents] = useState([]);
+    const [users, setUsers] = useState([]);
     const [error, setError] = useState({});
-    const mapevents = ["a", "b", "c", "d"];
+    const mapUsers = ["a", "b", "c", "d"];
 
-    const eventsFetcher = async() => {
+    const UsersFetcher = async() => {
         
         try{
-            const response = await axiosAPI.post('/events/admin/events')
+            const response = await axiosAPI.get('/users/admin/users')
             console.log("res :", response.data);
 
-            setevents(response.data)
-            //mapevents.push(...response.data.data)
+            setUsers(response.data)
+            //mapUsers.push(...response.data.data)
             console.log("done")
-            console.log("events :",events)
-            console.log("map events 1:", mapevents)
+            console.log("users :",users)
+            console.log("map users 1:", mapUsers)
             
-            //console.log("av data2 :",eventData.event);
+            //console.log("av data2 :",userData.user);
             
             
         }catch(err){
@@ -34,24 +34,24 @@ const Events = () => {
     }
 
     useEffect(() => {
-        eventsFetcher()
+        UsersFetcher()
     }, [])
 
 
 
     return (
         <>
-            <h1 className="text-teal-400">Events</h1>
+            <h1 className="text-teal-400">Dashboard</h1>
             <div className="flex flex-col justify-evenly items-center w-full">
                 <div className="w-full">
                     <h1>Create Events</h1>
                 </div>
 
                 <div className="w-full flex flex-col justify-evenly items-center gap-4">
-                    <h2>events</h2>
-                    {console.log("events 2:", events)}
-                    {mapevents.map((event) => (
-                        <EventCard key={event} event={event} />
+                    <h2>users</h2>
+                    {console.log("users 2:", users)}
+                    {users.map((user) => (
+                        <UserCard key={user} user={user} />
                         
                     ))}
                 </div>
@@ -60,4 +60,4 @@ const Events = () => {
     )
 }
 
-export default Events;
+export default Dashboard;

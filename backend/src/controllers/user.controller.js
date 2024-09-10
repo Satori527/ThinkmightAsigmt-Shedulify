@@ -283,18 +283,18 @@ const getCurrentUser = asyncHandler(async(req, res) => {
 
 
 
-const fetchUsers = asyncHandler( async (req, res) => {
+const getUsers = asyncHandler( async (req, res) => {
     const users = await User.find({})
     res.status(200).json(users)
 })
 
-const fetchUserById = asyncHandler( async (req, res) => {
-    const {id} = req.params;
+const getUserById = asyncHandler( async (req, res) => {
+    const {id} = req.body;
     const user = await User.findById(id)
     res.status(200).json(user)
 })
 
-const fetchUsersByName = asyncHandler( async (req, res) =>{
+const getUsersByName = asyncHandler( async (req, res) =>{
     const {name} = req.params
     
     const users = await User.find({
@@ -344,5 +344,5 @@ const updateAccountDetails = asyncHandler(async(req, res) => {
 });
 
 
-export { fetchUserById, fetchUsers, fetchUsersByName, filterUsersByAvailability, getCurrentUser, getUserAvailability, helloTest, loginUser, logoutUser, refreshAccessToken, registerUser, updateAccountDetails, updateAvailability };
+export { filterUsersByAvailability, getCurrentUser, getUserAvailability, getUserById, getUsers, getUsersByName, helloTest, loginUser, logoutUser, refreshAccessToken, registerUser, updateAccountDetails, updateAvailability };
 

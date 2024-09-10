@@ -2,6 +2,8 @@ import { Router } from "express";
 import {
     getCurrentUser,
     getUserAvailability,
+    getUserById,
+    getUsers,
     helloTest,
     loginUser,
     logoutUser,
@@ -23,8 +25,8 @@ router.route("/availability").post(getUserAvailability)
 router.route("/update-availability").post(updateAvailability)
 
 
-//router.route("/users").get(fetchUsers)
-//router.route("/users/:id").get(fetchUserById)
+router.route("/admin/users").get(getUsers)
+router.route("/admin/users/id").get(getUserById)
 //router.route("/users/:id/availability").get(getUserAvailability)
 
 //router.route("/").get(helloTest)

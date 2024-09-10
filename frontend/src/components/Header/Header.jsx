@@ -27,7 +27,7 @@ function Header() {
     return (
         <>
             <div className="head bg-sky-400 w-full h-16 flex flex-row justify-between items-center">
-                <div className="inline-block w-16 m-8">Logo</div>
+                <div className="inline-block w-16 m-8 text-3xl text-white">eventOr</div>
                 {
                     (authStatus)?
                     (<div className="flex gap-4 flex-row m-8">

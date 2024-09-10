@@ -16,10 +16,12 @@ app.use(cookieParser())
 
 
 //routes
+import eventRouter from './routes/event.routes.js';
 import userRouter from './routes/user.routes.js';
 
 //routes declaration
 app.use("/api/users", userRouter)
+app.use("/api/events", eventRouter)
 
 export { app };
 
