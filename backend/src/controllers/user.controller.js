@@ -233,30 +233,39 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
 })
 
 const getUserAvailability = asyncHandler(async(req, res) => {
+    console.log("getAvailability");
+    if(!req.body.availability){
+        throw new ApiError(400, "Availability is required")
+    }
+    const userAvailability = await Availability.findById(req.body.availability)
     return res
     .status(200)
     .json(new ApiResponse(
         200,
-        req.user.availability,
+        userAvailability,
         "User availability fetched successfully"
     ))
 })
 
 const updateAvailability = asyncHandler( async (req, res) => {
 
-    const userAvailability = req.body.availability;
+    const userAvailability = req.body;
 
-    const updatedUser = await User.findById(
-        req.user._id,
+    const updatedUser = await Availability.replaceOne(
         {
-            $set: {
-                Availability: userAvailability
-            }
+            _id: userAvailability._id
         },
-        {
-            new: true
-        }
+        userAvailability
     )
+
+    return res
+    .status(200)
+    .json(new ApiResponse(
+        200,
+        updatedUser,
+        "User availability updated successfully"
+    ))
+    
 
 })
 

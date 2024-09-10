@@ -17,11 +17,10 @@ router.route("/register").post(registerUser)
 router.route("/login").post(loginUser)
 
 router.route("/logout").post(verifyJWT,  logoutUser)
-router.route("/logout").post(verifyJWT,  logoutUser)
 router.route("/refresh-token").post(refreshAccessToken)
 router.route("/current-user").get(verifyJWT, getCurrentUser)
-router.route("/users/availability").get(verifyJWT,getUserAvailability)
-router.route("/users/update-availability").post(verifyJWT, updateAvailability)
+router.route("/availability").post(getUserAvailability)
+router.route("/update-availability").post(updateAvailability)
 
 
 //router.route("/users").get(fetchUsers)
